@@ -54,7 +54,7 @@ public class MainViewController implements Initializable {
 
 	}
 
-	private synchronized <T> void loadView(String absolutName, Consumer<T> initialingAction) {
+	private synchronized <T> void loadView(String absolutName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absolutName));
 			VBox newVBox = loader.load();
@@ -68,7 +68,7 @@ public class MainViewController implements Initializable {
 			mainVBox.getChildren().addAll(newVBox.getChildren());
 			
 			T controller = loader.getController();
-			initialingAction.accept(controller);
+			initializingAction.accept(controller);
 
 		} catch (IOException e) {
 			Alerts.showAlert("IO exception", "Error loading view", e.getMessage(), AlertType.ERROR);
